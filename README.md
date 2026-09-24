@@ -26,7 +26,7 @@ Small and mid-scale farmers often need equipment — tractors, harvesters, ploug
 The platform supports two user roles — **Farmer** (renter) and **Owner** — each with their own dashboard, and tracks the full booking lifecycle from request → confirmation → active rental → completion.
 
 <div align="center">
-<img src="./assets/farmrent-homepage.png" width="85%" alt="FarmRent homepage" />
+<img src="./screenshots/homepage.png" width="85%" alt="FarmRent homepage" />
 </div>
 
 ---
@@ -49,12 +49,12 @@ The platform supports two user roles — **Farmer** (renter) and **Owner** — e
 
 <table>
 <tr>
-<td width="50%"><img src="./assets/farmrent-equipment-list.png" width="100%" alt="Equipment listing" /><br/><em>All Equipment — filters & search</em></td>
-<td width="50%"><img src="./assets/farmrent-equipment-details.png" width="100%" alt="Equipment details" /><br/><em>Equipment details & booking panel</em></td>
+<td width="50%"><img src="./screenshots/equipment-list.png" width="100%" alt="Equipment listing" /><br/><em>All Equipment — filters & search</em></td>
+<td width="50%"><img src="./screenshots/equipment-details.png" width="100%" alt="Equipment details" /><br/><em>Equipment details & booking panel</em></td>
 </tr>
 <tr>
-<td width="50%"><img src="./assets/farmrent-dashboard.png" width="100%" alt="Farmer dashboard" /><br/><em>Farmer dashboard</em></td>
-<td width="50%"><img src="./assets/farmrent-login.png" width="100%" alt="Login page" /><br/><em>Login</em></td>
+<td width="50%"><img src="./screenshots/dashboard.png" width="100%" alt="Farmer dashboard" /><br/><em>Farmer dashboard</em></td>
+<td width="50%"><img src="./screenshots/login.png" width="100%" alt="Login page" /><br/><em>Login</em></td>
 </tr>
 </table>
 
