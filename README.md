@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/farmrent-logo.png" width="220" alt="FarmRent logo" />
+<img src="./screenshots/logo.png" width="220" alt="FarmRent logo" />
 
 # 🚜 FarmRent — Farm Equipment Rental Platform
 
