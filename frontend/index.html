@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmRent | Farm Equipment Rental Platform</title>
+
+    <meta
+        name="description"
+        content="A platform connecting farmers with equipment owners for convenient farm equipment rentals."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation
+    ========================== -->
+
+    <header class="navbar">
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Farm<span>Rent</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         Hero Section
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="hero-badge">
+                        Smart Farming. Easy Rentals.
+                    </span>
+
+                    <h1>
+                        Rent the right equipment
+                        <span>for your farm.</span>
+                    </h1>
+
+                    <p>
+                        Find reliable agricultural equipment from local owners
+                        and rent what you need without the cost of purchasing
+                        expensive machinery.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="equipment.html" class="btn btn-primary btn-large">
+                            Browse Equipment
+                        </a>
+
+                        <a href="register.html" class="btn btn-outline btn-large">
+                            List Your Equipment
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="hero-card">
+
+                    <div class="hero-card-header">
+                        <span>Quick Search</span>
+                        <span class="status-dot">Available</span>
+                    </div>
+
+                    <form id="quickSearchForm" class="search-form">
+
+                        <div class="form-group">
+                            <label for="equipmentType">
+                                Equipment Type
+                            </label>
+
+                            <select id="equipmentType" name="equipmentType">
+                                <option value="">Select equipment</option>
+                                <option value="tractor">Tractor</option>
+                                <option value="harvester">Harvester</option>
+                                <option value="plough">Plough</option>
+                                <option value="seeder">Seeder</option>
+                                <option value="sprayer">Sprayer</option>
+                                <option value="cultivator">Cultivator</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">
+                                Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="Enter your location"
+                            >
+                        </div>
+
+                        <div class="search-row">
+
+                            <div class="form-group">
+                                <label for="startDate">
+                                    Start Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="startDate"
+                                    name="startDate"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endDate">
+                                    End Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="endDate"
+                                    name="endDate"
+                                >
+                            </div>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary search-button"
+                        >
+                            Search Equipment
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             Categories
+        ========================== -->
+
+        <section class="categories section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">Explore</span>
+
+                    <h2>
+                        Equipment for every farming need
+                    </h2>
+
+                    <p>
+                        Browse commonly used agricultural equipment and
+                        find the right machine for your work.
+                    </p>
+                </div>
+
+                <div class="category-grid">
+
+                    <a href="equipment.html?category=tractor"
+                       class="category-card">
+                        <div class="category-icon">TR</div>
+                        <h3>Tractors</h3>
+                        <p>Powerful machines for field preparation and transport.</p>
+                    </a>
+
+                    <a href="equipment.html?category=harvester"
+                       class="category-card">
+                        <div class="category-icon">HV</div>
+                        <h3>Harvesters</h3>
+                        <p>Equipment designed to simplify harvesting operations.</p>
+                    </a>
+
+                    <a href="equipment.html?category=plough"
+                       class="category-card">
+                        <div class="category-icon">PL</div>
+                        <h3>Ploughs</h3>
+                        <p>Prepare and cultivate soil efficiently.</p>
+                    </a>
+
+                    <a href="equipment.html?category=seeder"
+                       class="category-card">
+                        <div class="category-icon">SD</div>
+                        <h3>Seeders</h3>
+                        <p>Improve consistency during planting and sowing.</p>
+                    </a>
+
+                    <a href="equipment.html?category=sprayer"
+                       class="category-card">
+                        <div class="category-icon">SP</div>
+                        <h3>Sprayers</h3>
+                        <p>Equipment for crop protection and field maintenance.</p>
+                    </a>
+
+                    <a href="equipment.html?category=cultivator"
+                       class="category-card">
+                        <div class="category-icon">CU</div>
+                        <h3>Cultivators</h3>
+                        <p>Support soil preparation and weed management.</p>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             Featured Equipment
+        ========================== -->
+
+        <section class="featured section">
+            <div class="container">
+
+                <div class="section-heading section-heading-row">
+
+                    <div>
+                        <span class="section-label">Featured</span>
+
+                        <h2>
+                            Popular equipment
+                        </h2>
+                    </div>
+
+                    <a href="equipment.html" class="text-link">
+                        View all equipment →
+                    </a>
+
+                </div>
+
+                <div class="equipment-grid">
+
+                    <article class="equipment-card">
+
+                        <div class="equipment-image">
+                            <span class="equipment-tag">
+                                Available
+                            </span>
+
+                            <div class="equipment-placeholder">
+                                TRACTOR
+                            </div>
+                        </div>
+
+                        <div class="equipment-info">
+
+                            <div class="equipment-category">
+                                Tractor
+                            </div>
+
+                            <h3>
+                                Mahindra Farm Tractor
+                            </h3>
+
+                            <p class="equipment-location">
+                                Vijayawada, Andhra Pradesh
+                            </p>
+
+                            <div class="equipment-footer">
+
+                                <div>
+                                    <strong>₹1,500</strong>
+                                    <span>/ day</span>
+                                </div>
+
+                                <a
+                                    href="equipment-details.html?id=tractor-001"
+                                    class="small-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="equipment-card">
+
+                        <div class="equipment-image">
+                            <span class="equipment-tag">
+                                Available
+                            </span>
+
+                            <div class="equipment-placeholder">
+                                HARVESTER
+                            </div>
+                        </div>
+
+                        <div class="equipment-info">
+
+                            <div class="equipment-category">
+                                Harvester
+                            </div>
+
+                            <h3>
+                                Compact Crop Harvester
+                            </h3>
+
+                            <p class="equipment-location">
+                                Guntur, Andhra Pradesh
+                            </p>
+
+                            <div class="equipment-footer">
+
+                                <div>
+                                    <strong>₹3,500</strong>
+                                    <span>/ day</span>
+                                </div>
+
+                                <a
+                                    href="equipment-details.html?id=harvester-001"
+                                    class="small-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="equipment-card">
+
+                        <div class="equipment-image">
+                            <span class="equipment-tag">
+                                Available
+                            </span>
+
+                            <div class="equipment-placeholder">
+                                SPRAYER
+                            </div>
+                        </div>
+
+                        <div class="equipment-info">
+
+                            <div class="equipment-category">
+                                Sprayer
+                            </div>
+
+                            <h3>
+                                Agricultural Crop Sprayer
+                            </h3>
+
+                            <p class="equipment-location">
+                                Tenali, Andhra Pradesh
+                            </p>
+
+                            <div class="equipment-footer">
+
+                                <div>
+                                    <strong>₹800</strong>
+                                    <span>/ day</span>
+                                </div>
+
+                                <a
+                                    href="equipment-details.html?id=sprayer-001"
+                                    class="small-btn"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             How It Works
+        ========================== -->
+
+        <section id="how-it-works" class="how-it-works section">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">Simple Process</span>
+
+                    <h2>
+                        How FarmRent works
+                    </h2>
+
+                    <p>
+                        A simple rental process for farmers and equipment owners.
+                    </p>
+                </div>
+
+                <div class="steps-grid">
+
+                    <div class="step-card">
+                        <span class="step-number">01</span>
+
+                        <h3>Search</h3>
+
+                        <p>
+                            Search for agricultural equipment based on
+                            equipment type, location, and rental dates.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">02</span>
+
+                        <h3>Compare</h3>
+
+                        <p>
+                            Review equipment details, rental prices,
+                            availability, and owner information.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">03</span>
+
+                        <h3>Request</h3>
+
+                        <p>
+                            Select your rental period and submit a
+                            request to the equipment owner.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-number">04</span>
+
+                        <h3>Rent</h3>
+
+                        <p>
+                            Once the request is approved, coordinate
+                            equipment pickup or delivery with the owner.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             About
+        ========================== -->
+
+        <section id="about" class="about section">
+
+            <div class="container about-content">
+
+                <div class="about-text">
+
+                    <span class="section-label">
+                        About FarmRent
+                    </span>
+
+                    <h2>
+                        Making agricultural equipment more accessible
+                    </h2>
+
+                    <p>
+                        FarmRent is designed to connect farmers who need
+                        agricultural machinery with equipment owners who
+                        want to make their machines available for rental.
+                    </p>
+
+                    <p>
+                        The platform focuses on making equipment discovery,
+                        availability checking, and rental requests easier
+                        through a centralized web application.
+                    </p>
+
+                    <div class="about-points">
+
+                        <div>
+                            <strong>For Farmers</strong>
+                            <span>Find equipment without purchasing it.</span>
+                        </div>
+
+                        <div>
+                            <strong>For Owners</strong>
+                            <span>List equipment and manage rental requests.</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="about-card">
+
+                    <div class="about-stat">
+                        <strong>6+</strong>
+                        <span>Equipment categories</span>
+                    </div>
+
+                    <div class="about-stat">
+                        <strong>24/7</strong>
+                        <span>Platform access</span>
+                    </div>
+
+                    <div class="about-stat">
+                        <strong>1</strong>
+                        <span>Centralized rental platform</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+                    Farm<span>Rent</span>
+                </a>
+
+                <p>
+                    Connecting farmers with agricultural equipment owners
+                    through a simple rental platform.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Platform</h4>
+                    <a href="equipment.html">Browse Equipment</a>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                </div>
+
+                <div>
+                    <h4>Project</h4>
+                    <a href="#about">About</a>
+                    <a href="#how-it-works">How It Works</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>
+                © 2026 FarmRent. Academic project.
+            </p>
+        </div>
+
+    </footer>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

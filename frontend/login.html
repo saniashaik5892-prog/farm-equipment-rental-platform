@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | FarmRent</title>
+
+    <meta
+        name="description"
+        content="Login to your FarmRent account."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .auth-page {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background: var(--background-soft);
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+
+            padding: 38px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .auth-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+
+        .auth-header p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 46px;
+
+            padding: 0 13px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+
+            outline: none;
+
+            color: var(--text-dark);
+            background: #ffffff;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.1);
+        }
+
+        .password-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+        }
+
+        .password-row label {
+            margin: 0;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            font-size: 0.75rem;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .auth-button {
+            width: 100%;
+            height: 46px;
+
+            margin-top: 5px;
+        }
+
+        .form-message {
+            display: none;
+
+            margin-bottom: 15px;
+            padding: 11px 13px;
+
+            border-radius: var(--radius-sm);
+
+            background: #fff3f3;
+            color: #b42318;
+
+            font-size: 0.8rem;
+        }
+
+        .form-message.show {
+            display: block;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: var(--border);
+        }
+
+        .register-text {
+            text-align: center;
+
+            color: var(--text-medium);
+            font-size: 0.85rem;
+        }
+
+        .register-text a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-note {
+            margin-top: 20px;
+            padding: 12px;
+
+            border-radius: var(--radius-sm);
+
+            background: var(--background-soft);
+
+            color: var(--text-light);
+            font-size: 0.72rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            .auth-page {
+                padding: 35px 15px;
+            }
+
+            .auth-card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Farm<span>Rent</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="index.html#how-it-works">
+                    How It Works
+                </a>
+                <a href="index.html#about">
+                    About
+                </a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="btn btn-outline"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="register.html"
+                    class="btn btn-primary"
+                >
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         Login
+    ========================== -->
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <div class="auth-header">
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Login to manage your FarmRent account.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="password-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a
+                            href="#"
+                            class="forgot-password"
+                            id="forgotPassword"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div
+                    id="loginMessage"
+                    class="form-message"
+                ></div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary auth-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                OR
+            </div>
+
+
+            <p class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create an account
+                </a>
+
+            </p>
+
+
+            <div class="demo-note">
+
+                Demo interface for the FarmRent academic project.
+                Authentication will be connected to the MySQL
+                database in the backend integration stage.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 FarmRent. Academic project.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>

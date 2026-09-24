@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Equipment | FarmRent</title>
+
+    <meta
+        name="description"
+        content="Browse and rent agricultural equipment through FarmRent."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Equipment page specific styles */
+
+        .equipment-page {
+            padding: 70px 0 90px;
+            background: var(--background-soft);
+        }
+
+        .page-header {
+            margin-bottom: 35px;
+        }
+
+        .page-header h1 {
+            margin-bottom: 10px;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            line-height: 1.15;
+        }
+
+        .page-header p {
+            max-width: 650px;
+            color: var(--text-medium);
+        }
+
+        .filter-panel {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+            gap: 14px;
+            align-items: end;
+
+            margin-bottom: 40px;
+            padding: 22px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .filter-group label {
+            color: var(--text-dark);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            height: 44px;
+
+            padding: 0 12px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+
+            outline: none;
+
+            background: #ffffff;
+            color: var(--text-dark);
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.10);
+        }
+
+        .filter-button {
+            height: 44px;
+            white-space: nowrap;
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .results-header h2 {
+            font-size: 1.25rem;
+        }
+
+        .results-count {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .equipment-grid-page {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .equipment-card-page {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition);
+        }
+
+        .equipment-card-page:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .equipment-card-page.hidden {
+            display: none;
+        }
+
+        .equipment-visual {
+            position: relative;
+
+            height: 200px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #edf5ee,
+                    #dcebdd
+                );
+        }
+
+        .equipment-visual span {
+            color: #6a876e;
+
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .availability {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            background: #ffffff;
+            color: var(--success);
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .availability.unavailable {
+            color: var(--danger);
+        }
+
+        .equipment-details {
+            padding: 22px;
+        }
+
+        .equipment-type {
+            margin-bottom: 5px;
+
+            color: var(--primary);
+
+            font-size: 0.7rem;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .equipment-details h3 {
+            margin-bottom: 7px;
+
+            font-size: 1.08rem;
+        }
+
+        .location {
+            margin-bottom: 18px;
+
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+
+        .equipment-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            margin-bottom: 18px;
+        }
+
+        .meta-item {
+            padding: 5px 9px;
+
+            border-radius: 6px;
+
+            background: var(--background-soft);
+            color: var(--text-medium);
+
+            font-size: 0.72rem;
+        }
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding-top: 16px;
+
+            border-top: 1px solid #edf0ed;
+        }
+
+        .price strong {
+            font-size: 1.1rem;
+        }
+
+        .price span {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+
+        .empty-state {
+            display: none;
+
+            padding: 60px 20px;
+
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+
+            text-align: center;
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--text-medium);
+        }
+
+        @media (max-width: 1000px) {
+            .filter-panel {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .equipment-grid-page {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .filter-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-grid-page {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation
+    ========================== -->
+
+    <header class="navbar">
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Farm<span>Rent</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="equipment.html" class="active">Equipment</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary">
+                    Register
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         Equipment Page
+    ========================== -->
+
+    <main class="equipment-page">
+
+        <div class="container">
+
+            <section class="page-header">
+
+                <span class="section-label">
+                    Equipment Marketplace
+                </span>
+
+                <h1>
+                    Find the equipment you need
+                </h1>
+
+                <p>
+                    Browse agricultural equipment available for rental.
+                    Search by equipment type, location, and rental price.
+                </p>
+
+            </section>
+
+
+            <!-- =========================
+                 Filters
+            ========================== -->
+
+            <section class="filter-panel">
+
+                <div class="filter-group">
+
+                    <label for="searchInput">
+                        Search
+                    </label>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search equipment..."
+                    >
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="categoryFilter">
+                        Category
+                    </label>
+
+                    <select id="categoryFilter">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="tractor">
+                            Tractor
+                        </option>
+
+                        <option value="harvester">
+                            Harvester
+                        </option>
+
+                        <option value="plough">
+                            Plough
+                        </option>
+
+                        <option value="seeder">
+                            Seeder
+                        </option>
+
+                        <option value="sprayer">
+                            Sprayer
+                        </option>
+
+                        <option value="cultivator">
+                            Cultivator
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="locationFilter">
+                        Location
+                    </label>
+
+                    <select id="locationFilter">
+
+                        <option value="all">
+                            All Locations
+                        </option>
+
+                        <option value="vijayawada">
+                            Vijayawada
+                        </option>
+
+                        <option value="guntur">
+                            Guntur
+                        </option>
+
+                        <option value="tenali">
+                            Tenali
+                        </option>
+
+                        <option value="amaravati">
+                            Amaravati
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="priceFilter">
+                        Maximum Price
+                    </label>
+
+                    <select id="priceFilter">
+
+                        <option value="all">
+                            Any Price
+                        </option>
+
+                        <option value="1000">
+                            Up to ₹1,000/day
+                        </option>
+
+                        <option value="2000">
+                            Up to ₹2,000/day
+                        </option>
+
+                        <option value="3000">
+                            Up to ₹3,000/day
+                        </option>
+
+                        <option value="5000">
+                            Up to ₹5,000/day
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="filterButton"
+                    class="btn btn-primary filter-button"
+                >
+                    Apply Filters
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 Results
+            ========================== -->
+
+            <div class="results-header">
+
+                <h2>
+                    Available Equipment
+                </h2>
+
+                <span
+                    id="resultsCount"
+                    class="results-count"
+                >
+                    6 equipment listings
+                </span>
+
+            </div>
+
+
+            <!-- =========================
+                 Equipment Grid
+            ========================== -->
+
+            <section
+                id="equipmentGrid"
+                class="equipment-grid-page"
+            >
+
+                <!-- Tractor -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="mahindra farm tractor"
+                    data-category="tractor"
+                    data-location="vijayawada"
+                    data-price="1500"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>TRACTOR</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Tractor
+                        </div>
+
+                        <h3>
+                            Mahindra Farm Tractor
+                        </h3>
+
+                        <p class="location">
+                            Vijayawada, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                45 HP
+                            </span>
+
+                            <span class="meta-item">
+                                Diesel
+                            </span>
+
+                            <span class="meta-item">
+                                Manual
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹1,500</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=tractor-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Harvester -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="compact crop harvester"
+                    data-category="harvester"
+                    data-location="guntur"
+                    data-price="3500"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>HARVESTER</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Harvester
+                        </div>
+
+                        <h3>
+                            Compact Crop Harvester
+                        </h3>
+
+                        <p class="location">
+                            Guntur, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                Multi Crop
+                            </span>
+
+                            <span class="meta-item">
+                                Diesel
+                            </span>
+
+                            <span class="meta-item">
+                                Field Ready
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹3,500</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=harvester-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Plough -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="heavy duty farm plough"
+                    data-category="plough"
+                    data-location="tenali"
+                    data-price="900"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>PLOUGH</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Plough
+                        </div>
+
+                        <h3>
+                            Heavy Duty Farm Plough
+                        </h3>
+
+                        <p class="location">
+                            Tenali, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                3 Blade
+                            </span>
+
+                            <span class="meta-item">
+                                Tractor Mount
+                            </span>
+
+                            <span class="meta-item">
+                                Heavy Duty
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹900</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=plough-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Seeder -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="precision seed drill"
+                    data-category="seeder"
+                    data-location="amaravati"
+                    data-price="1200"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>SEEDER</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Seeder
+                        </div>
+
+                        <h3>
+                            Precision Seed Drill
+                        </h3>
+
+                        <p class="location">
+                            Amaravati, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                7 Row
+                            </span>
+
+                            <span class="meta-item">
+                                Precision
+                            </span>
+
+                            <span class="meta-item">
+                                Tractor Mount
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹1,200</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=seeder-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Sprayer -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="agricultural crop sprayer"
+                    data-category="sprayer"
+                    data-location="tenali"
+                    data-price="800"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>SPRAYER</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Sprayer
+                        </div>
+
+                        <h3>
+                            Agricultural Crop Sprayer
+                        </h3>
+
+                        <p class="location">
+                            Tenali, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                16 L
+                            </span>
+
+                            <span class="meta-item">
+                                Portable
+                            </span>
+
+                            <span class="meta-item">
+                                Manual
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹800</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=sprayer-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Cultivator -->
+
+                <article
+                    class="equipment-card-page"
+                    data-name="rotary field cultivator"
+                    data-category="cultivator"
+                    data-location="vijayawada"
+                    data-price="1100"
+                >
+
+                    <div class="equipment-visual">
+
+                        <span>CULTIVATOR</span>
+
+                        <div class="availability">
+                            Available
+                        </div>
+
+                    </div>
+
+                    <div class="equipment-details">
+
+                        <div class="equipment-type">
+                            Cultivator
+                        </div>
+
+                        <h3>
+                            Rotary Field Cultivator
+                        </h3>
+
+                        <p class="location">
+                            Vijayawada, Andhra Pradesh
+                        </p>
+
+                        <div class="equipment-meta">
+                            <span class="meta-item">
+                                9 Tine
+                            </span>
+
+                            <span class="meta-item">
+                                Tractor Mount
+                            </span>
+
+                            <span class="meta-item">
+                                Heavy Duty
+                            </span>
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div class="price">
+                                <strong>₹1,100</strong>
+                                <span>/ day</span>
+                            </div>
+
+                            <a
+                                href="equipment-details.html?id=cultivator-001"
+                                class="small-btn"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 Empty Search State
+            ========================== -->
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+                <h3>
+                    No equipment found
+                </h3>
+
+                <p>
+                    Try changing your search or filter options.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+                    Farm<span>Rent</span>
+                </a>
+
+                <p>
+                    Connecting farmers with agricultural equipment owners
+                    through a simple rental platform.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Platform</h4>
+
+                    <a href="equipment.html">
+                        Browse Equipment
+                    </a>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="register.html">
+                        Register
+                    </a>
+                </div>
+
+                <div>
+                    <h4>Project</h4>
+
+                    <a href="index.html#about">
+                        About
+                    </a>
+
+                    <a href="index.html#how-it-works">
+                        How It Works
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 FarmRent. Academic project.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/equipment.js"></script>
+
+</body>
+</html>

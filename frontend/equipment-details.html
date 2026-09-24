@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Equipment Details | FarmRent</title>
+
+    <meta
+        name="description"
+        content="View agricultural equipment details and request a rental through FarmRent."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .details-page {
+            padding: 70px 0 90px;
+            background: var(--background-soft);
+        }
+
+        .breadcrumb {
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .details-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .equipment-image {
+            min-height: 470px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: var(--radius-md);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #edf5ee,
+                    #dcebdd
+                );
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .equipment-image span {
+            color: #648067;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .details-card {
+            padding: 32px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .details-type {
+            margin-bottom: 8px;
+
+            color: var(--primary);
+
+            font-size: 0.75rem;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .details-card h1 {
+            margin-bottom: 10px;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+        }
+
+        .details-location {
+            margin-bottom: 25px;
+            color: var(--text-light);
+        }
+
+        .details-description {
+            margin-bottom: 28px;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .specifications {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+
+            margin-bottom: 28px;
+        }
+
+        .specification {
+            padding: 15px;
+
+            border-radius: var(--radius-sm);
+            background: var(--background-soft);
+        }
+
+        .specification span {
+            display: block;
+            margin-bottom: 4px;
+
+            color: var(--text-light);
+            font-size: 0.72rem;
+        }
+
+        .specification strong {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .rental-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+            padding: 18px 0;
+
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .rental-price strong {
+            font-size: 1.7rem;
+        }
+
+        .rental-price span {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .availability-status {
+            color: var(--success);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .rental-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input {
+            height: 45px;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.1);
+        }
+
+        .request-button {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .form-message {
+            display: none;
+
+            padding: 12px;
+
+            border-radius: var(--radius-sm);
+
+            background: #edf7ee;
+            color: var(--success);
+
+            font-size: 0.82rem;
+        }
+
+        .form-message.show {
+            display: block;
+        }
+
+        .info-section {
+            margin-top: 45px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            padding: 24px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+        }
+
+        .info-card h3 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .info-card p {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 850px) {
+            .details-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-image {
+                min-height: 320px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .details-card {
+                padding: 22px;
+            }
+
+            .specifications {
+                grid-template-columns: 1fr;
+            }
+
+            .rental-box {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Farm<span>Rent</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="btn btn-outline">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary">
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         Details Page
+    ========================== -->
+
+    <main class="details-page">
+
+        <div class="container">
+
+            <div class="breadcrumb">
+                <a href="equipment.html">
+                    Equipment
+                </a>
+                &nbsp; / &nbsp;
+                <span id="breadcrumbName">
+                    Equipment Details
+                </span>
+            </div>
+
+
+            <section class="details-layout">
+
+                <!-- Equipment Visual -->
+
+                <div class="equipment-image">
+
+                    <span id="equipmentVisual">
+                        EQUIPMENT
+                    </span>
+
+                </div>
+
+
+                <!-- Details -->
+
+                <div class="details-card">
+
+                    <div
+                        id="equipmentType"
+                        class="details-type"
+                    >
+                        Agricultural Equipment
+                    </div>
+
+                    <h1 id="equipmentName">
+                        Mahindra Farm Tractor
+                    </h1>
+
+                    <p
+                        id="equipmentLocation"
+                        class="details-location"
+                    >
+                        Vijayawada, Andhra Pradesh
+                    </p>
+
+                    <p
+                        id="equipmentDescription"
+                        class="details-description"
+                    >
+                        Reliable agricultural equipment available for
+                        short-term rental. Suitable for regular farm
+                        preparation and field operations.
+                    </p>
+
+
+                    <!-- Specifications -->
+
+                    <div class="specifications">
+
+                        <div class="specification">
+
+                            <span>
+                                Power / Capacity
+                            </span>
+
+                            <strong id="equipmentPower">
+                                45 HP
+                            </strong>
+
+                        </div>
+
+                        <div class="specification">
+
+                            <span>
+                                Fuel
+                            </span>
+
+                            <strong id="equipmentFuel">
+                                Diesel
+                            </strong>
+
+                        </div>
+
+                        <div class="specification">
+
+                            <span>
+                                Usage
+                            </span>
+
+                            <strong id="equipmentUsage">
+                                Agricultural
+                            </strong>
+
+                        </div>
+
+                        <div class="specification">
+
+                            <span>
+                                Rental Type
+                            </span>
+
+                            <strong>
+                                Daily
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Rental Information -->
+
+                    <div class="rental-box">
+
+                        <div class="rental-price">
+
+                            <strong id="equipmentPrice">
+                                ₹1,500
+                            </strong>
+
+                            <span>
+                                / day
+                            </span>
+
+                        </div>
+
+                        <div class="availability-status">
+                            Available for rental
+                        </div>
+
+                    </div>
+
+
+                    <!-- Rental Request Form -->
+
+                    <form
+                        id="rentalForm"
+                        class="rental-form"
+                    >
+
+                        <div class="form-group">
+
+                            <label for="startDate">
+                                Rental Start Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="endDate">
+                                Rental End Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="endDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Message to Equipment Owner
+                            </label>
+
+                            <textarea
+                                id="message"
+                                placeholder="Enter any additional requirements..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div
+                            id="formMessage"
+                            class="form-message"
+                        >
+                            Rental request submitted successfully.
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary request-button"
+                        >
+                            Request Rental
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 Information
+            ========================== -->
+
+            <section class="info-section">
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+
+                        <h3>
+                            Flexible Rentals
+                        </h3>
+
+                        <p>
+                            Select rental dates based on your farming
+                            requirements and equipment availability.
+                        </p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <h3>
+                            Local Equipment
+                        </h3>
+
+                        <p>
+                            Browse equipment listings based on location
+                            and connect with nearby equipment owners.
+                        </p>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <h3>
+                            Direct Requests
+                        </h3>
+
+                        <p>
+                            Send a rental request with your preferred
+                            dates and requirements.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+                    Farm<span>Rent</span>
+                </a>
+
+                <p>
+                    Connecting farmers with agricultural equipment
+                    owners through a simple rental platform.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Platform
+                    </h4>
+
+                    <a href="equipment.html">
+                        Browse Equipment
+                    </a>
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                    <a href="register.html">
+                        Register
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Project
+                    </h4>
+
+                    <a href="index.html#about">
+                        About
+                    </a>
+
+                    <a href="index.html#how-it-works">
+                        How It Works
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 FarmRent. Academic project.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/equipment-details.js"></script>
+
+</body>
+</html>

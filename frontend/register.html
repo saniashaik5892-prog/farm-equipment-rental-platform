@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | FarmRent</title>
+
+    <meta
+        name="description"
+        content="Create a FarmRent account to rent or list agricultural equipment."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .auth-page {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background: var(--background-soft);
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 500px;
+
+            padding: 38px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: #ffffff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .auth-header {
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+
+        .auth-header p {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 45px;
+
+            padding: 0 13px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+
+            outline: none;
+
+            color: var(--text-dark);
+            background: #ffffff;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .password-help {
+            margin-top: -2px;
+
+            color: var(--text-light);
+            font-size: 0.7rem;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            margin: 20px 0;
+
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            width: 15px;
+            height: 15px;
+
+            margin-top: 2px;
+
+            accent-color: var(--primary);
+        }
+
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-button {
+            width: 100%;
+            height: 46px;
+        }
+
+        .form-message {
+            display: none;
+
+            margin-bottom: 15px;
+            padding: 11px 13px;
+
+            border-radius: var(--radius-sm);
+
+            font-size: 0.8rem;
+        }
+
+        .form-message.error {
+            display: block;
+
+            background: #fff3f3;
+            color: #b42318;
+        }
+
+        .form-message.success {
+            display: block;
+
+            background: #edf7ee;
+            color: var(--success);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: var(--border);
+        }
+
+        .login-text {
+            text-align: center;
+
+            color: var(--text-medium);
+            font-size: 0.85rem;
+        }
+
+        .login-text a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-note {
+            margin-top: 20px;
+            padding: 12px;
+
+            border-radius: var(--radius-sm);
+
+            background: var(--background-soft);
+
+            color: var(--text-light);
+            font-size: 0.72rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 550px) {
+            .auth-page {
+                padding: 35px 15px;
+            }
+
+            .auth-card {
+                padding: 28px 22px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         Navigation
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Farm<span>Rent</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+
+                <a href="equipment.html">
+                    Equipment
+                </a>
+
+                <a href="index.html#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="index.html#about">
+                    About
+                </a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="btn btn-outline"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="register.html"
+                    class="btn btn-primary"
+                >
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         Registration
+    ========================== -->
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <div class="auth-header">
+
+                <h1>
+                    Create Your Account
+                </h1>
+
+                <p>
+                    Join FarmRent as a farmer or equipment owner.
+                </p>
+
+            </div>
+
+
+            <form id="registerForm">
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Email and Phone -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="10-digit number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Role -->
+
+                <div class="form-group">
+
+                    <label for="role">
+                        Account Type
+                    </label>
+
+                    <select
+                        id="role"
+                        name="role"
+                        required
+                    >
+
+                        <option value="">
+                            Select account type
+                        </option>
+
+                        <option value="farmer">
+                            Farmer
+                        </option>
+
+                        <option value="owner">
+                            Equipment Owner
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="City / District"
+                        autocomplete="address-level2"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <span class="password-help">
+                        Password must contain at least 6 characters.
+                    </span>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Re-enter your password"
+                        minlength="6"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Terms -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <span>
+                        I agree to the FarmRent
+                        <a href="#">
+                            terms of use
+                        </a>
+                        and understand that rental requests
+                        are subject to equipment availability.
+                    </span>
+
+                </label>
+
+
+                <!-- Message -->
+
+                <div
+                    id="registerMessage"
+                    class="form-message"
+                ></div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="btn btn-primary auth-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                OR
+            </div>
+
+
+            <p class="login-text">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login here
+                </a>
+
+            </p>
+
+
+            <div class="demo-note">
+
+                Demo interface for the FarmRent academic project.
+                User registration will be connected to MySQL
+                during backend integration.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 FarmRent. Academic project.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
